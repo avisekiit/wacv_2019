@@ -13,27 +13,41 @@ Object Detectors folder: detectors/
 1)	Firstly we use Adversarial Networks for domain adaptation. The folder gans/ contains codes of both Cycle GAN and Forward GAN which are tested in our paper for adaptation from image to video domains.
 
 
-` cd gans/ `
+```
+cd gans/
+```
 
 Download voc training set images into datasets/voc2yto folder. (only images are sufficient, as it is an unsupervised learning) 
-` wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar `
+```
+wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar
+```
 
 Download youtube training set images into datasets/voc2yto folder from below site.
-` https://data.vision.ee.ethz.ch/cvl/youtube-objects/ `
+```
+https://data.vision.ee.ethz.ch/cvl/youtube-objects/
+```
 
 To train:
-` python train.py --dataroot ./datasets/voc2yto --name voc2yto_cyclegan --model cycle_gan `
+```
+python train.py --dataroot ./datasets/voc2yto --name voc2yto_cyclegan --model cycle_gan 
+```
 
 To test:
-` python test.py --dataroot ./datasets/voc2yto --name voc2yto_cyclegan --model cycle_gan `
+```
+python test.py --dataroot ./datasets/voc2yto --name voc2yto_cyclegan --model cycle_gan
+```
 
-	Secondly train the transformed image domain jpgs using two object detectors present in the detectors/ folder. Later test the trained model on youtube test images.
+Secondly train the transformed image domain jpgs using two object detectors present in the detectors/ folder. Later test the trained model on youtube test images.
 
-` cd detectors/ `
+```
+cd detectors/
+```
 
 Faster RCNN:
+```
+cd Faster-RCNN_TF
+```
 
-` cd Faster-RCNN_TF `
 To train and test:
 ```
 cd $FRCN_ROOT
@@ -41,10 +55,14 @@ cd $FRCN_ROOT
 ```
 
 RFBNet:
-` cd PytorchSSD `
-To train and test:
-` python train_test.py -d VOC -v RFB_vgg -s 300 `
+```
+cd PytorchSSD
+```
 
+To train and test:
+```
+python train_test.py -d VOC -v RFB_vgg -s 300
+```
 
 
 2) 	Second proposed idea contains use of conditional cycle GAN, which is use of cycle GAN to transform each class images separately, train them and test
